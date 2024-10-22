@@ -45,7 +45,7 @@ class SyncLDAP(object):
     def sync_users(self):
         """Synchronize LDAP users with local user model."""
         if self.settings.USER_FILTER:
-            user_attributes = self.settings.USER_ATTRIBUTES.keys() + self.settings.USER_EXTRA_ATTRIBUTES
+            user_attributes = list(self.settings.USER_ATTRIBUTES.keys()) + list(self.settings.USER_EXTRA_ATTRIBUTES)
             ldap_users = self.ldap.search(self.settings.USER_FILTER, user_attributes)
             self._sync_ldap_users(ldap_users)
             logger.info("Users are synchronized")
